@@ -1,0 +1,11 @@
+node_modules/
+
+## logs
+logs
+*.log
+yarn-debug.logs*
+
+## Env
+.env
+
+.npm
