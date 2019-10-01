@@ -34,9 +34,13 @@ userController.register = async (req, res, next) => {
     // save user on DB
     try {
         const savedUser = await user.save();
-        res.send({user: user._id}); 
+        res.send({
+            user: user._id,
+            savedUser
+        }); 
     } catch (error) {
         res.status(400).send(error);
+        next(error)
     }
 };
 
