@@ -1,6 +1,7 @@
 const User= require('../models/user.model.js');
 const bcrypt = require('bcryptjs');
-const {registerValidation} = require('../actions/validation');
+const jwt= require('jsonwebtoken');
+const {registerValidation, loginValidation} = require('../actions/validation');
 const userController ={};
 
 /**
@@ -44,4 +45,42 @@ userController.register = async (req, res, next) => {
     }
 };
 
+/**
+ * Login Logic
+ */
+userController.login = async (req, res, next) => {
+
+    //User validation befor login
+    const {error} = loginValidation(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    
+    try{
+        // check if e-mail existe 
+        const user= await User.findOne({email:req.body.email});
+        if(!user) {
+            const err = new Error(`The email ${req.body.email} was not found`);
+            err.status = 401;
+            next(err);
+        }
+        else{
+            // compare password with the hash
+            const validPass= await bcrypt.compare(req.body.password , user.password);
+            if(!validPass){
+                const err = new Error(`The password is wrong`);
+                err.status = 401;
+                next(err);
+            }else{
+                // //assign a token
+                const token =jwt.sign({_id: user._id} , process.env.TOKEN_SECRET);
+                res.header('auth-token', token).send({
+                    message:'you can login',
+                    token
+                });
+            } 
+        }
+    }catch(e){
+        next(e);
+    }
+
+};
 module.exports = userController;
