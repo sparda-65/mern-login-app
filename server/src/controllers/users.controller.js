@@ -53,7 +53,7 @@ userController.login = async (req, res, next) => {
     //User validation befor login
     const {error} = loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
-    
+
     try{
         // check if e-mail existe 
         const user= await User.findOne({email:req.body.email});
@@ -66,13 +66,13 @@ userController.login = async (req, res, next) => {
             // compare password with the hash
             const validPass= await bcrypt.compare(req.body.password , user.password);
             if(!validPass){
-                const err = new Error(`The password is wrong`);
+                const err = new Error(`Invalide user/password combination`);
                 err.status = 401;
                 next(err);
             }else{
-                // //assign a token
-                const token =jwt.sign({_id: user._id} , process.env.TOKEN_SECRET);
-                res.header('auth-token', token).send({
+                //assign a token
+                const token =jwt.sign({_id: user._id} , process.env.TOKEN_SECRET,{expiresIn: process.env.TOKEN_EXPIRATION });
+                res.header('Authorization', token).send({
                     message:'you can login',
                     token
                 });
@@ -83,4 +83,6 @@ userController.login = async (req, res, next) => {
     }
 
 };
+
+
 module.exports = userController;
