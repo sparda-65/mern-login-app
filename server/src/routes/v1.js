@@ -26,7 +26,8 @@ router.all('*', (req, res, next)=>{
 
 router.get('/test' ,(req, res, next)=>{
     return res.send({
-        message: "you are authenticated"
+        message: "you are authenticated",
+        user: req.user
     });
 })
 module.exports = router;
