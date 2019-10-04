@@ -1,0 +1,17 @@
+{
+  "name": "mern-login-app",
+  "version": "1.0.0",
+  "description": "MERN Stack login App",
+  "main": "index.js",
+  "repository": "https://github.com/sparda-65.com/mern-login-app",
+  "author": "Abdellah chahboune",
+  "license": "MIT",
+  "scripts": {
+    "server": " npm run dev --prefix server",
+    "client": " npm start --prefix client",
+    "start": "concurrently \"npm run dev --prefix server\" \"npm start --prefix client\""
+  },
+  "dependencies": {
+    "concurrently": "^4.1.2"
+  }
+}
