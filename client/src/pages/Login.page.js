@@ -57,7 +57,7 @@ class Login extends Component {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.email && touched.password ? (<FormFeedback>{errors.password}</FormFeedback>) : null}
+                  {errors.password && touched.password ? (<FormFeedback>{errors.password}</FormFeedback>) : null}
                 </FormGroup>
                 <Button color="primary" size="md" onClick={handleSubmit} disabled={!isValid || isSubmitting}>
                   Connexion
