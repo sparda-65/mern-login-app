@@ -38,6 +38,9 @@ class NavBar extends Component {
               <NavItem>
               <Link to="/Login" className="nav-link">Login</Link>
               </NavItem>
+              <NavItem>
+              <Link to="/SingUp" className="nav-link">Sing Up</Link>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
