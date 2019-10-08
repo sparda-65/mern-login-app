@@ -11,8 +11,8 @@ function App() {
       <Container>
       <NavBar/>
       <Route path='/' component ={Home} exact/>
-      <Route path='/Login' component ={Login} exact/>
-      <Route path='/Singup' component ={SingUp} exact/>
+      <Route path='/login' component ={Login} exact/>
+      <Route path='/signup' component ={SingUp} exact/>
       </Container>
     </div>
   );

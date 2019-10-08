@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const cors =require('cors')
 const passport = require('passport');
+
+
 const v1 = require('./routes/v1');
+
 const app = express();
 
 // ---------------BD Config---------//
@@ -23,6 +27,8 @@ connection.once('error', (err) => {
 // ---------------Moddlewares---------//
 app.use(logger('dev'));
 app.use(express.json());
+
+app.use(cors());
 
 app.use(passport.initialize());
 app.use(passport.session());

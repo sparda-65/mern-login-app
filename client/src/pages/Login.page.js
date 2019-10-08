@@ -1,11 +1,16 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input, FormFeedback } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-class Login extends Component {
+
+import { signIn } from '../actions';
+
+class LoginPage extends Component {
   _handleFormSubmit(values) {
-    console.log(values);
+    this.props.signIn(values);
   }
   render() {
     return (
@@ -65,9 +70,17 @@ class Login extends Component {
               </div>
             )}
         />
+        <span>Vous n'avez spanas un compte? <Link to='/signup'>Inscrivez-vous</Link></span>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ auth }) => {
+  return {
+    attempting : auth.attempting,
+    error: auth.error
+  };
+};
+const Login = connect(mapStateToProps, { signIn })(LoginPage);
 export { Login };
