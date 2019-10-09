@@ -11,9 +11,13 @@ import { signIn } from '../actions';
 class LoginPage extends Component {
 
   componentDidUpdate() {
-    const { error } = this.props;
+    const { error , isAuth} = this.props;
     if (error && this.bag) {
       this.bag.setSubmitting(false);
+    }
+    console.log(isAuth);
+    if(isAuth){
+      this.props.history.push('/');
     }
   };
 
@@ -99,7 +103,8 @@ class LoginPage extends Component {
 const mapStateToProps = ({ auth }) => {
   return {
     attempting: auth.attempting,
-    error: auth.error
+    error: auth.error,
+    isAuth: auth.isAuth
   };
 };
 const Login = connect(mapStateToProps, { signIn })(LoginPage);
