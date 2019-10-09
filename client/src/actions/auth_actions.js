@@ -1,13 +1,12 @@
 import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED } from './types';
-import axios from 'axios';
-
+import {apiLogin} from '../api/user'
 const TOKEN_NAME = 'Login_app_token';
 
 export const signIn = (request_data) => {
     return async dispatch => {
         try {
             dispatch({ type: AUTH_ATTEMPTING });
-            const { data: { token } } = await axios.post('/api/v1/auth', request_data);
+            const { data: { token } } = await apiLogin(request_data);
             dispatch(success(token));
         } catch (e) {
             const { response: { data } } = e;
