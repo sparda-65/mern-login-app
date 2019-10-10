@@ -6,11 +6,8 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -71,7 +68,7 @@ class NavBarComponent extends Component {
           <Link to="/login" className="nav-link">Login</Link>
         </NavItem>
         <NavItem>
-          <Link to="/signup" className="nav-link">Sign UP</Link>
+          <Link to="/signup" className="nav-link">Sign Up</Link>
         </NavItem>
       </Nav>
     );
