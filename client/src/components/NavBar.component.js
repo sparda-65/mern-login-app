@@ -22,7 +22,8 @@ class NavBarComponent extends Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
-    this.toggleButton=this.toggleButton.bind(this);
+    this.toggleButton = this.toggleButton.bind(this);
+    //this._renderLoginOrLogout=this._renderLoginOrLogout.bind(this);
 
     this.state = {
       isOpen: false,
@@ -37,35 +38,42 @@ class NavBarComponent extends Component {
     });
   }
 
-  toggleButton(){
+  toggleButton() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   };
 
   _renderLoginOrLogout() {
-    const {isAuth}=this.props;
-    if(isAuth){
-      return(
-        <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleButton}>
-        <DropdownToggle caret color="link" size="sm">
-          Button Dropdown
+    const { isAuth } = this.props;
+    if (isAuth) {
+      return (
+        <Nav className="ml-auto" navbar>
+          <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleButton}>
+            <DropdownToggle caret color="link" size="sm">
+              Welcome
         </DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
-        </DropdownMenu>
-      </ButtonDropdown>
+            <DropdownMenu>
+              <DropdownItem header>Header</DropdownItem>
+              <DropdownItem disabled>Action</DropdownItem>
+              <DropdownItem>Dashboard</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Logout</DropdownItem>
+            </DropdownMenu>
+          </ButtonDropdown>
+        </Nav>
       );
     }
 
     return (
-      <NavItem>
-        <Link to="/login" className="nav-link">Login</Link>
-      </NavItem>
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <Link to="/login" className="nav-link">Login</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/signup" className="nav-link">Sign UP</Link>
+        </NavItem>
+      </Nav>
     );
   };
   render() {
@@ -75,9 +83,9 @@ class NavBarComponent extends Component {
           <Link to="/" className="navbar-brand">Mern Login App</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              {this._renderLoginOrLogout()}
-            </Nav>
+
+            {this._renderLoginOrLogout()}
+
           </Collapse>
         </Navbar>
       </div>
