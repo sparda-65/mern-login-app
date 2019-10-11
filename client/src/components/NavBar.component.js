@@ -14,6 +14,8 @@ import {
   ButtonDropdown,
 } from 'reactstrap';
 
+import { logUserOut } from '../actions';
+
 class NavBarComponent extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,7 @@ class NavBarComponent extends Component {
   };
 
   _renderLoginOrLogout() {
-    const { isAuth } = this.props;
+    const { isAuth, logUserOut } = this.props;
     if (isAuth) {
       return (
         <Nav className="ml-auto" navbar>
@@ -55,7 +57,7 @@ class NavBarComponent extends Component {
               <DropdownItem disabled>Action</DropdownItem>
               <DropdownItem>Dashboard</DropdownItem>
               <DropdownItem divider />
-              <DropdownItem>Logout</DropdownItem>
+              <DropdownItem onClick={() => logUserOut()}>Logout</DropdownItem>
             </DropdownMenu>
           </ButtonDropdown>
         </Nav>
@@ -95,6 +97,6 @@ const mapStateToProps = ({ auth }) => {
     isAuth: auth.isAuth
   };
 };
-const NavBar = connect(mapStateToProps)(NavBarComponent);
+const NavBar = connect(mapStateToProps, { logUserOut })(NavBarComponent);
 
 export { NavBar };
