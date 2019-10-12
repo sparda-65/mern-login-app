@@ -44,13 +44,13 @@ class NavBarComponent extends Component {
   };
 
   _renderLoginOrLogout() {
-    const { isAuth, logUserOut } = this.props;
+    const { isAuth, logUserOut,profile } = this.props;
     if (isAuth) {
       return (
         <Nav className="ml-auto" navbar>
           <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleButton}>
             <DropdownToggle caret color="link" size="sm">
-              Welcome
+              Welcome,{profile.username}
         </DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Header</DropdownItem>
@@ -94,7 +94,8 @@ class NavBarComponent extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    isAuth: auth.isAuth
+    isAuth: auth.isAuth,
+    profile: auth.profile
   };
 };
 const NavBar = connect(mapStateToProps, { logUserOut })(NavBarComponent);

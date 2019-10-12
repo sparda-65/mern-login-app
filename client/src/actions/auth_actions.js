@@ -1,5 +1,5 @@
-import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED, USER_LOGOUT } from './types';
-import { apiLogin } from '../api/user'
+import { AUTH_ATTEMPTING, AUTH_SUCCESS, AUTH_FAILED, USER_LOGOUT,PROFILE_FETCHED } from './types';
+import { apiLogin , getProfile,setAuthHeader} from '../api'
 const TOKEN_NAME = 'Login_app_token';
 
 export const signIn = (request_data) => {
@@ -7,6 +7,8 @@ export const signIn = (request_data) => {
         try {
             dispatch({ type: AUTH_ATTEMPTING });
             const { data: { token } } = await apiLogin(request_data);
+            setAuthHeader(token);
+            dispatch(fetchProfile());
             dispatch(success(token));
         } catch (e) {
             const { response: { data } } = e;
@@ -22,11 +24,24 @@ export const onLoadingSignIn = () => {
             if (token === null || token === 'undefined') {
                 return dispatch(error('Il faut vous identifier'));
             }
+            setAuthHeader(token);
             dispatch(success(token));
         } catch (e) {
             console.error(e);
         }
     }
+}
+
+export const fetchProfile = () => {
+
+    return async dispatch => {
+        try {
+            const {data:{user}}=await getProfile();
+        dispatch({type:PROFILE_FETCHED, payload: user});
+        } catch (e) {
+            
+        }
+    };
 }
 
 export const logUserOut = () => {

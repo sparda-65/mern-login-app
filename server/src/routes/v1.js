@@ -23,7 +23,7 @@ router.all('*', (req, res, next)=>{
 
 
 //---------Protected Routes------------
-
+router.get('/me',userController.me);
 router.get('/test' ,(req, res, next)=>{
     return res.send({
         message: "you are authenticated",
