@@ -1,18 +1,20 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
-import {Container} from 'reactstrap';
+import { Route, Switch } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
-import {Home, Login, SingUp} from './pages/index.page';
-import {NavBar} from './components/index.component'
+import { Home, Login, SingUp } from './pages/index.page';
+import { NavBar, ProtectedRoute} from './components/index.component'
 
 function App() {
   return (
     <div>
       <Container>
-      <NavBar/>
-      <Route path='/' component ={Home} exact/>
-      <Route path='/login' component ={Login} exact/>
-      <Route path='/signup' component ={SingUp} exact/>
+        <NavBar />
+        <Switch>
+          <ProtectedRoute path='/' component={Home} exact />
+        </Switch>
+        <Route path='/login' component={Login} exact />
+        <Route path='/signup' component={SingUp} exact />
       </Container>
     </div>
   );

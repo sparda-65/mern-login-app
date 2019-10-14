@@ -22,7 +22,6 @@ class NavBarComponent extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.toggleButton = this.toggleButton.bind(this);
-    //this._renderLoginOrLogout=this._renderLoginOrLogout.bind(this);
 
     this.state = {
       isOpen: false,
@@ -44,14 +43,14 @@ class NavBarComponent extends Component {
   };
 
   _renderLoginOrLogout() {
-    const { isAuth, logUserOut,profile } = this.props;
+    const { isAuth, logUserOut, profile } = this.props;
     if (isAuth) {
       return (
         <Nav className="ml-auto" navbar>
           <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleButton}>
             <DropdownToggle caret color="link" size="sm">
               Welcome,{profile.username}
-        </DropdownToggle>
+            </DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Header</DropdownItem>
               <DropdownItem disabled>Action</DropdownItem>

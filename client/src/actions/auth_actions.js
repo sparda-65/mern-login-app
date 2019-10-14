@@ -25,6 +25,7 @@ export const onLoadingSignIn = () => {
                 return dispatch(error('Il faut vous identifier'));
             }
             setAuthHeader(token);
+            dispatch(fetchProfile());
             dispatch(success(token));
         } catch (e) {
             console.error(e);
