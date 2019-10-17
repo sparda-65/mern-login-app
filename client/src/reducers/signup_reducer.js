@@ -2,7 +2,7 @@ import { SIGNUP_ATTEMPTING,SIGNUP_SUCCESS,SIGNUP_FAILED, PROFILE_FETCHED } from 
 
 const INITIAL_STATE = {
     attempting: false,
-    isAuth: false,
+    isregister: false,
     profile: {},
     error: null
 };
@@ -13,21 +13,21 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 attempting: true,
-                isAuth: false,
+                isregister: false,
                 error: null
             }
         case SIGNUP_SUCCESS:
             return {
                 ...state,
                 attempting: false,
-                isAuth: true,
+                isregister: true,
                 error: null
             }
         case SIGNUP_FAILED:
             return {
                 ...state,
                 attempting: false,
-                isAuth: false,
+                isregister: false,
                 error: action.payload
             }
         case PROFILE_FETCHED:

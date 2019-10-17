@@ -6,10 +6,12 @@ export const signUp = (request_data) => {
     return async dispatch => {
         try {
             dispatch({ type: SIGNUP_ATTEMPTING });
-            await apiSignUp(request_data);
+            const data=await apiSignUp(request_data);
+            console.log(data);
             dispatch(success());
         } catch (e) {
             const { response: { data } } = e;
+            console.log(data.error);
             dispatch(error(data.error));
         }
     };

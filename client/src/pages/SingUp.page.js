@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Label, Input, FormFeedback } from "reactstrap";
+import { Button, FormGroup, Label, Input, FormFeedback,Alert } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -12,11 +12,22 @@ class SignUpPage extends Component {
         this.props.signUp(values);
         this.bag = bag;
     }
+    _renderErrorIfAny() {
+        const { error } = this.props;
+        if (error) {
+          return (
+            <Alert color="danger">{error}</Alert>
+          );
+        }
+      }
     render() {
         return (
             <div style={{ padding: 20 }}>
                 <h3>Créer un nouveau compte</h3>
                 <hr />
+
+                {this._renderErrorIfAny()}
+
                 <Formik
                     initialValues={{ username: "", email: "", password: "" }}
                     onSubmit={this._handleFormSubmit.bind(this)}
