@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input, FormFeedback } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-class SingUp extends Component {
-    _handleFormSubmit(values) {
-        console.log(values);
+import { signUp } from '../actions';
+
+class SignUpPage extends Component {
+    _handleFormSubmit(values, bag) {
+        this.props.signUp(values);
+        this.bag = bag;
     }
     render() {
         return (
@@ -87,4 +91,12 @@ class SingUp extends Component {
     }
 }
 
-export { SingUp };
+const mapStateToProps = ({ register }) => {
+    return {
+      attempting: register.attempting,
+      error: register.error,
+    };
+  };
+  const SignUp = connect(mapStateToProps, { signUp })(SignUpPage);
+
+export { SignUp };
