@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Label, Input, FormFeedback,Alert } from "reactstrap";
+import { Button, FormGroup, Label, Input, FormFeedback, Alert } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { signUp } from '../actions';
 
 class SignUpPage extends Component {
+
+    componentDidUpdate() {
+        const { error, isregister } = this.props;
+        if (error && this.bag) {
+            console.log(this.bag);
+            this.bag.setSubmitting(false);
+        }
+        console.log('isregister SignUpPage ' + isregister);
+
+    };
+
     _handleFormSubmit(values, bag) {
         this.props.signUp(values);
         this.bag = bag;
@@ -15,11 +26,11 @@ class SignUpPage extends Component {
     _renderErrorIfAny() {
         const { error } = this.props;
         if (error) {
-          return (
-            <Alert color="danger">{error}</Alert>
-          );
+            return (
+                <Alert color="danger">{error}</Alert>
+            );
         }
-      }
+    }
     render() {
         return (
             <div style={{ padding: 20 }}>
@@ -104,10 +115,11 @@ class SignUpPage extends Component {
 
 const mapStateToProps = ({ register }) => {
     return {
-      attempting: register.attempting,
-      error: register.error,
+        attempting: register.attempting,
+        isregister: register.isregister,
+        error: register.error
     };
-  };
-  const SignUp = connect(mapStateToProps, { signUp })(SignUpPage);
+};
+const SignUp = connect(mapStateToProps, { signUp })(SignUpPage);
 
 export { SignUp };
