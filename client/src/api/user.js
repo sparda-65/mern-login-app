@@ -5,8 +5,7 @@ export const apiLogin = (request_data) => {
 };
 
 export const getProfile = () => {
-    
-    return axios.get('api/v1/me',)
+    return axios.get('api/v1/me')
 };
 
 export const apiSignUp = (request_data) => {
