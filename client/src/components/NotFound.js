@@ -6,7 +6,7 @@ class NotFound extends Component {
     render() {
         return (
             <div>
-                <img src={PageNotFound} style={{ width: 1100, height: 600, display: 'block', margin: 'auto', position: 'relative' }} />
+                <img src={PageNotFound} alt="NotFound" style={{ width: 1100, height: 600, display: 'block', margin: 'auto', position: 'relative' }} />
                 <center><Link to="/">Return to Home Page</Link></center>
             </div>
         );
