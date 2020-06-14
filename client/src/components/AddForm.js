@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { FloatButon } from '../components/index.component'
 import { Button, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap'
 import { Formik } from "formik";
+import moment from 'moment';
+import * as Yup from 'yup';
 
 class AddFormComponent extends Component {
     constructor(props) {
@@ -21,6 +23,7 @@ class AddFormComponent extends Component {
     }
 
     render() {
+        const now =moment().format('YYYY-MM-DD')
         return (
             <div>
                 <FloatButon onClick={this.toggle} />
@@ -29,8 +32,12 @@ class AddFormComponent extends Component {
                     <ModalBody>
 
                         <Formik
-                            initialValues={{}}
-                            render={({ errors, handleBlur, handleChange, touched }) => (
+                            initialValues={{site: "", date:now}}
+                            validationSchema={Yup.object().shape({
+                                site:Yup.string().min(8).required(),
+                                date:Yup.date().required(),
+                            })}
+                            render={({ errors, handleBlur, handleChange, touched,values }) => (
                                 <div>
                                     <FormGroup>
                                         <Label for="site">POP</Label>
@@ -41,6 +48,7 @@ class AddFormComponent extends Component {
                                             placeholder="Entrer nom POP"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
+                                            value={values.site}
                                         />
                                         {errors.site && touched.site ? (<FormFeedback>{errors.site}</FormFeedback>) : null}
                                     </FormGroup>
@@ -54,6 +62,7 @@ class AddFormComponent extends Component {
                                             placeholder="Entrer date Prestation"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
+                                            value={values.date}
                                         />
                                         {errors.date && touched.date ? (<FormFeedback>{errors.date}</FormFeedback>) : null}
                                     </FormGroup>
