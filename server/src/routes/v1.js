@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 const userController = require('../controllers/users.controller');
+const popController = require('../controllers/Pops.controller');
 
 // Auth and Sing Up
 router.post('/register', userController.register);
@@ -27,7 +28,13 @@ router.get('/me', userController.me);
 router.get('/test', (req, res, next) => {
     return res.send({
         message: "you are authenticated",
-        user: req.user
     });
-})
+});
+
+router.post('/pop', popController.create);
+router.get('/pop', (req, res, next) => {
+    return res.send({
+        message: "you are authenticated",
+    });
+});
 module.exports = router;
