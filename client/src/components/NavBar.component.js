@@ -49,7 +49,7 @@ class NavBarComponent extends Component {
         <Nav className="ml-auto" navbar>
           <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleButton}>
             <DropdownToggle caret color="link" size="sm">
-              Welcome,{profile.username}
+              <span style={{color:'#ffff',backgroundColor:'#d6acb4'}}>Welcome,{profile.username}</span>  
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Header</DropdownItem>

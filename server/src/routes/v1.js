@@ -32,9 +32,7 @@ router.get('/test', (req, res, next) => {
 });
 
 router.post('/pop', popController.create);
-router.get('/pop', (req, res, next) => {
-    return res.send({
-        message: "you are authenticated",
-    });
-});
+router.get('/pop', popController.get);
+router.delete('/pop/:pop_id', popController.destroy);
+router.put('/pop/:pop_id', popController.update);
 module.exports = router;
